@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering", "Ordering\Ordering.csproj", "{BFD0B3EB-86C6-445B-815E-F46CFB3CBCD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutboxPlayground", "OutboxPlayground\OutboxPlayground.csproj", "{BFD0B3EB-86C6-445B-815E-F46CFB3CBCD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{85870E14-730A-4431-9BAF-748BDC228710}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
