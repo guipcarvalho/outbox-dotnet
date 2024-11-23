@@ -1,6 +1,36 @@
 @Ordering_HostAddress = http://localhost:5018
 
-GET {{Ordering_HostAddress}}/weatherforecast/
+GET {{Ordering_HostAddress}}/api/Courses
 Accept: application/json
 
 ###
+
+GET {{Ordering_HostAddress}}/api/Courses/1
+Accept: application/json
+
+###
+
+POST {{Ordering_HostAddress}}/api/Courses
+Content-Type: application/json
+
+{
+  "name": "New Course",
+  "description": "Course description",
+  "reviews": []
+}
+
+###
+
+PUT {{Ordering_HostAddress}}/api/Courses/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Course",
+  "description": "Updated description",
+  "reviews": []
+}
+
+###
+
+DELETE {{Ordering_HostAddress}}/api/Courses/1

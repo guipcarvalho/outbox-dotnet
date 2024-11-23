@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Ordering.Data;
 using Ordering.Data.Repositories;
 using Ordering.Data.Repositories.Contracts;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ await context.Database.MigrateAsync();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();

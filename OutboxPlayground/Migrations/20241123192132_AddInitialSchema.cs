@@ -1,18 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GraphQL.Playground.Data.Migrations
+namespace Ordering.Migrations
 {
     /// <inheritdoc />
-    public partial class AddReviews : Migration
+    public partial class AddInitialSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Review",
-                table: "Courses");
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Reviews",
@@ -47,12 +60,8 @@ namespace GraphQL.Playground.Data.Migrations
             migrationBuilder.DropTable(
                 name: "Reviews");
 
-            migrationBuilder.AddColumn<int>(
-                name: "Review",
-                table: "Courses",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.DropTable(
+                name: "Courses");
         }
     }
 }

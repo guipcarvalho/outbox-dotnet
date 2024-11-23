@@ -11,5 +11,5 @@ public interface ICourseRepository
     
     Task<Course> UpdateCourseAsync(Course course);
     
-    Task DeleteCourseAsync(int idCourse);
+    Task<bool> DeleteCourseAsync(int idCourse);
 }
