@@ -2,10 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Ordering.Model.Entities;
 
-public class Course
+public class Course : IAggregateRoot
 {
-    [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public required string Name { get; set; }
     public required string Description { get; set; }
     public DateTime DateAdded { get; set; }

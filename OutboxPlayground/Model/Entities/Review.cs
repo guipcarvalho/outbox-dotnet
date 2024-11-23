@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Ordering.Model.Entities;
 
@@ -11,6 +12,8 @@ public class Review
     public string Comment { get; set; }
     
     public int CourseId { get; set; }
+    
     [ForeignKey(nameof(CourseId))]
-    public Course Course { get; set; }
+    [JsonIgnore]
+    public Course? Course { get; set; }
 }
