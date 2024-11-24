@@ -7,11 +7,12 @@ namespace Ordering.Model.Entities;
 public class Review
 {
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public int Rating { get; set; }
-    public string Comment { get; set; }
+    [MaxLength(500)]
+    public required string Comment { get; set; }
     
-    public int CourseId { get; set; }
+    public Guid CourseId { get; set; }
     
     [ForeignKey(nameof(CourseId))]
     [JsonIgnore]

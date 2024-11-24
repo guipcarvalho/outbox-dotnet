@@ -20,7 +20,7 @@ namespace Ordering.Controllers
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<Course>> GetCourse(Guid id)
         {
             var course = await courseRepository.GetCourseByIdAsync(id, true);
             if (course == null)
@@ -40,7 +40,7 @@ namespace Ordering.Controllers
 
         // PUT: api/Courses/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutCourse(Guid id, Course course)
         {
             if (id != course.Id)
             {
@@ -53,7 +53,7 @@ namespace Ordering.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<IActionResult> DeleteCourse(Guid id)
         {
             return await courseRepository.DeleteCourseAsync(id) ? NoContent() : NotFound();
         }

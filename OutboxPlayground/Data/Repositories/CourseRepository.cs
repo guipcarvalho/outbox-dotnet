@@ -23,13 +23,14 @@ public class CourseRepository(ApplicationContext context) : ICourseRepository
         return baseQuery;
     }
 
-    public async Task<Course?> GetCourseByIdAsync(int id, bool includeReviews = false)
+    public async Task<Course?> GetCourseByIdAsync(Guid id, bool includeReviews = false)
     {
         return await GetBaseQuery(includeReviews).FirstOrDefaultAsync(c => c.Id == id);
     }
     
     public async Task<Course> AddCourseAsync(Course course)
     {
+        course.Id = Guid.NewGuid();
         course.DateAdded = DateTime.Now;
         await context.Courses.AddAsync(course);
         if(course.Reviews is { Count: > 0 })
@@ -55,7 +56,7 @@ public class CourseRepository(ApplicationContext context) : ICourseRepository
         return course;
     }
     
-    public async Task<bool> DeleteCourseAsync(int idCourse)
+    public async Task<bool> DeleteCourseAsync(Guid idCourse)
     {
         var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == idCourse);
         
