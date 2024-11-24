@@ -1,7 +1,9 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Data;
 using Ordering.Data.Repositories;
 using Ordering.Data.Repositories.Contracts;
+using Ordering.Events;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,10 +16,19 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<ApplicationContext>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IOutboxRepository, OutboxRepository>();
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddMassTransit(opt => { 
+    opt.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+    });
+});
+
+builder.Services.AddHostedService<OutboxBackgroundService>();
 
 var app = builder.Build();
 

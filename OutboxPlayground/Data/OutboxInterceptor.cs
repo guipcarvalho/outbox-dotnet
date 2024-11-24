@@ -26,7 +26,7 @@ internal sealed class OutboxInterceptor : SaveChangesInterceptor
                     Id = ((IAggregateRoot)x.Entity).Id,
                     Type = x.Entity.GetType().Name,
                     Action = changeType,
-                    Payload = JsonSerializer.Serialize(x.Entity)
+                    Payload = JsonSerializer.Serialize(x.Entity) //we could map to a event model here
                 };
             })
             .ToList();
